@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lezzet Durağı - Pizza ve Hamburger</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Lezzet Durağı</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" routerLink="about" routerLinkActive="about">Hakkımızda</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="menu" routerLinkActive="menu">Menüler</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="contact" routerLinkActive="contact">İletişim</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-danger text-white text-center py-5">
+        <h1>En Lezzetli Pizza ve Hamburgerler Burada!</h1>
+        <p>Kaliteli malzemelerle hazırlanmış, enfes tatlarla buluşun.</p>
+    </header>
+
+    <router-outlet></router-outlet>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 Lezzet Durağı. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
