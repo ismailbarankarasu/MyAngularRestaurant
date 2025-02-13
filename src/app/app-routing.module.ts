@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MenuComponent } from './menu/menu.component';
+import { CategoryComponent } from './admin/category/category.component';
 
 const routes: Routes =
 [
@@ -20,7 +21,9 @@ const routes: Routes =
 //Admin route yapılandırması
 {
   path:'admin', component:AdminLayoutComponent,
-
+  children: [
+    {path:'category', component:CategoryComponent}
+  ]
 }
 ];
 
