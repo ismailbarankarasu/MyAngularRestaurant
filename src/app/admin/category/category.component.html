@@ -1,0 +1,11 @@
+
+<table class="table table-hover">
+  <tr>
+    <th>#</th>
+    <th>Kategori Adı</th>
+  </tr>
+  <tr *ngFor="let item of categoryList; let i = index">
+    <td>{{i+1}}</td>
+    <td>{{item.categoryName}}</td>
+  </tr>
+</table>
