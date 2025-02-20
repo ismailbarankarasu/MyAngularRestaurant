@@ -4,7 +4,11 @@ import { Component } from '@angular/core';
   selector: 'app-main-layout',
   standalone: false,
   templateUrl: './main-layout.component.html',
-  styleUrl: './main-layout.component.css'
+  styleUrls:[ './main-layout.component.css',
+    "/src/assets/lib/animate/animate.min.css",
+    "/src/assets/lib/owlcarousel/assets/owl.carousel.min.css",
+
+  ]
 })
 export class MainLayoutComponent {
 
