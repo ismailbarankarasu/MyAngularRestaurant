@@ -1,0 +1,37 @@
+<div
+  class="container-xxl py-5 bg-dark hero-header mb-5"
+  *ngIf="feature"
+>
+  <div class="container my-5 py-5">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6 text-center text-lg-start">
+
+        <h1 class="display-3 text-white animated slideInLeft">
+          {{ feature.title }}
+        </h1>
+
+        <p class="text-white animated slideInLeft mb-4 pb-2">
+          {{ feature.description }}
+        </p>
+
+        <a
+          [href]="feature.buttonUrl"
+          class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft"
+        >
+          {{ feature.buttonTitle }}
+        </a>
+
+      </div>
+
+      <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+        <img
+          class="img-fluid"
+          [src]="feature.imageUrl"
+          [alt]="feature.title"
+        >
+      </div>
+
+    </div>
+  </div>
+</div>

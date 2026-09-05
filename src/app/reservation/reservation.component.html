@@ -1,0 +1,228 @@
+<div
+  class="container-xxl py-5 px-0 wow fadeInUp"
+  id="reservation"
+  data-wow-delay="0.1s"
+>
+  <div class="row g-0">
+
+    <div class="col-md-6">
+      <div class="video">
+        <button
+          type="button"
+          class="btn-play"
+          data-bs-toggle="modal"
+          data-bs-target="#videoModal"
+        >
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-6 bg-dark d-flex align-items-center">
+      <div class="p-5 wow fadeInUp w-100" data-wow-delay="0.2s">
+
+        <h5 class="section-title ff-secondary text-start text-primary fw-normal">
+          Reservation
+        </h5>
+
+        <h1 class="text-white mb-4">
+          Book A Table Online
+        </h1>
+
+        <div
+          *ngIf="successMessage"
+          class="alert alert-success"
+        >
+          {{ successMessage }}
+        </div>
+
+        <div
+          *ngIf="errorMessage"
+          class="alert alert-danger"
+        >
+          {{ errorMessage }}
+        </div>
+
+        <form
+          #reservationForm="ngForm"
+          (ngSubmit)="createReservation(reservationForm)"
+          novalidate
+        >
+          <div class="row g-3">
+
+            <div class="col-md-6">
+              <div class="form-floating">
+
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Your Name"
+                  [(ngModel)]="reservation.name"
+                  #name="ngModel"
+                  required
+                  minlength="3"
+                  maxlength="100"
+                >
+
+                <label for="name">
+                  Your Name
+                </label>
+
+              </div>
+
+              <small
+                class="text-danger"
+                *ngIf="name.invalid && name.touched"
+              >
+                <span *ngIf="name.errors?.['required']">
+                  Ad soyad boş bırakılamaz.
+                </span>
+
+                <span *ngIf="name.errors?.['minlength']">
+                  Ad soyad en az 3 karakter olmalıdır.
+                </span>
+              </small>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-floating">
+
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Your Email"
+                  [(ngModel)]="reservation.email"
+                  #email="ngModel"
+                  required
+                  email
+                >
+
+                <label for="email">
+                  Your Email
+                </label>
+
+              </div>
+
+              <small
+                class="text-danger"
+                *ngIf="email.invalid && email.touched"
+              >
+                <span *ngIf="email.errors?.['required']">
+                  Email adresi boş bırakılamaz.
+                </span>
+
+                <span *ngIf="email.errors?.['email']">
+                  Geçerli bir email adresi giriniz.
+                </span>
+              </small>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-floating">
+
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  id="reservationDate"
+                  name="reservationDate"
+                  [(ngModel)]="reservation.reservationDate"
+                  #reservationDate="ngModel"
+                  required
+                >
+
+                <label for="reservationDate">
+                  Date & Time
+                </label>
+
+              </div>
+
+              <small
+                class="text-danger"
+                *ngIf="reservationDate.invalid && reservationDate.touched"
+              >
+                Rezervasyon tarihi boş bırakılamaz.
+              </small>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-floating">
+
+                <select
+                  class="form-select"
+                  id="personCount"
+                  name="personCount"
+                  [(ngModel)]="reservation.personCount"
+                  #personCount="ngModel"
+                  required
+                  min="1"
+                  max="20"
+                >
+                  <option [ngValue]="1">1 Person</option>
+                  <option [ngValue]="2">2 People</option>
+                  <option [ngValue]="3">3 People</option>
+                  <option [ngValue]="4">4 People</option>
+                  <option [ngValue]="5">5 People</option>
+                  <option [ngValue]="6">6 People</option>
+                  <option [ngValue]="7">7 People</option>
+                  <option [ngValue]="8">8 People</option>
+                </select>
+
+                <label for="personCount">
+                  No Of People
+                </label>
+
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-floating">
+
+                <textarea
+                  class="form-control"
+                  placeholder="Special Request"
+                  id="specialRequest"
+                  name="specialRequest"
+                  style="height: 100px"
+                  [(ngModel)]="reservation.specialRequest"
+                  #specialRequest="ngModel"
+                  maxlength="500"
+                ></textarea>
+
+                <label for="specialRequest">
+                  Special Request
+                </label>
+
+              </div>
+
+              <small
+                class="text-danger"
+                *ngIf="specialRequest.errors?.['maxlength'] && specialRequest.touched"
+              >
+                Özel istek en fazla 500 karakter olabilir.
+              </small>
+            </div>
+
+            <div class="col-12">
+
+              <button
+                class="btn btn-primary w-100 py-3"
+                type="submit"
+                [disabled]="isSubmitting"
+              >
+                {{ isSubmitting ? 'Please Wait...' : 'Book Now' }}
+              </button>
+
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,199 @@
+<div class="container-fluid">
+
+  <div class="mb-4">
+    <h2>Hizmet Yönetimi</h2>
+    <p class="text-muted">
+      Ana sayfada gösterilen hizmet kartlarını yönetin.
+    </p>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+
+      <h5 class="card-title mb-4">
+        {{ isEditMode ? 'Hizmet Güncelle' : 'Yeni Hizmet Ekle' }}
+      </h5>
+
+      <form
+        #serviceForm="ngForm"
+        (ngSubmit)="saveService()"
+        novalidate
+      >
+
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              Başlık
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              [(ngModel)]="service.title"
+              #title="ngModel"
+              required
+              minlength="3"
+              maxlength="100"
+            >
+
+            <small
+              class="text-danger"
+              *ngIf="title.invalid && title.touched"
+            >
+              Başlık en az 3 karakter olmalıdır.
+            </small>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              Icon Class
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              name="icon"
+              [(ngModel)]="service.icon"
+              #icon="ngModel"
+              required
+              placeholder="fa fa-3x fa-utensils text-primary mb-4"
+            >
+
+            <small
+              class="text-danger"
+              *ngIf="icon.invalid && icon.touched"
+            >
+              Icon alanı boş bırakılamaz.
+            </small>
+          </div>
+
+          <div class="col-12 mb-3">
+            <label class="form-label">
+              Açıklama
+            </label>
+
+            <textarea
+              class="form-control"
+              rows="4"
+              name="description"
+              [(ngModel)]="service.description"
+              #description="ngModel"
+              required
+              minlength="10"
+              maxlength="300"
+            ></textarea>
+
+            <small
+              class="text-danger"
+              *ngIf="description.invalid && description.touched"
+            >
+              Açıklama 10 ile 300 karakter arasında olmalıdır.
+            </small>
+          </div>
+
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary me-2"
+          [disabled]="serviceForm.invalid"
+        >
+          {{ isEditMode ? 'Güncelle' : 'Kaydet' }}
+        </button>
+
+        <button
+          *ngIf="isEditMode"
+          type="button"
+          class="btn btn-secondary"
+          (click)="resetForm()"
+        >
+          Vazgeç
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <h5 class="card-title mb-3">
+        Hizmetler
+      </h5>
+
+      <div class="table-responsive">
+
+        <table class="table table-hover align-middle">
+
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Icon</th>
+              <th>Başlık</th>
+              <th>Açıklama</th>
+              <th class="text-end">İşlemler</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let item of services">
+
+              <td>
+                {{ item.serviceId }}
+              </td>
+
+              <td>
+                <i [class]="item.icon"></i>
+              </td>
+
+              <td>
+                {{ item.title }}
+              </td>
+
+              <td>
+                {{ item.description }}
+              </td>
+
+              <td class="text-end">
+
+                <button
+                  class="btn btn-warning btn-sm me-2"
+                  (click)="editService(item)"
+                >
+                  Düzenle
+                </button>
+
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteService(item.serviceId)"
+                >
+                  Sil
+                </button>
+
+              </td>
+
+            </tr>
+
+            <tr *ngIf="services.length === 0">
+              <td
+                colspan="5"
+                class="text-center text-muted py-4"
+              >
+                Hizmet kaydı bulunamadı.
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

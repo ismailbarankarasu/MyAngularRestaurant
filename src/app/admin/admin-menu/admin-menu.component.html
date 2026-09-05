@@ -1,200 +1,821 @@
 <div class="container mt-4">
-  <!-- Header Section -->
+
+  <!-- Header -->
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3>Menü Yönetimi</h3>
-    <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#createModal">
-      <i class="fas fa-plus me-2"></i> Yeni Ürün
+
+    <div>
+      <h3 class="mb-1">
+        Menü Yönetimi
+      </h3>
+
+      <p class="text-muted mb-0">
+        Menü ürünlerini ekleyin, güncelleyin ve silin.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary d-flex align-items-center"
+      data-bs-toggle="modal"
+      data-bs-target="#createModal"
+    >
+      <i class="fas fa-plus me-2"></i>
+      Yeni Ürün
     </button>
+
   </div>
 
-  <!-- Search and Filter Section -->
+
+  <!-- Search and Filter -->
   <div class="row mb-4">
-    <div class="col-md-4">
+
+    <div class="col-md-4 mb-2">
+
       <div class="input-group">
+
         <span class="input-group-text">
           <i class="fas fa-search"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Ürün ara...">
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Ürün ara..."
+        >
+
       </div>
+
     </div>
-    <div class="col-md-3">
+
+
+    <div class="col-md-3 mb-2">
+
       <select class="form-select">
-        <option value="">Tüm Kategoriler</option>
-        <option *ngFor="let category of categoryList" [value]="category.id">
-          {{category.categoryName}}
+
+        <option value="">
+          Tüm Kategoriler
         </option>
+
+        <option
+          *ngFor="let category of categoryList"
+          [value]="category.id"
+        >
+          {{ category.categoryName }}
+        </option>
+
       </select>
+
     </div>
+
   </div>
 
-  <!-- Table Section -->
+
+  <!-- Menu Table -->
   <div class="table-responsive shadow-sm rounded">
-    <table class="table">
+
+    <table class="table table-hover align-middle mb-0">
+
       <thead>
+
         <tr>
+
           <th>#</th>
+
           <th>Resim</th>
+
           <th>Başlık</th>
+
           <th>Fiyat</th>
+
           <th>Kategori</th>
-          <th class="text-center">İşlemler</th>
+
+          <th class="text-center">
+            İşlemler
+          </th>
+
         </tr>
+
       </thead>
+
+
       <tbody>
+
         <tr *ngFor="let item of menuList; let i = index">
-          <td>{{i+1}}</td>
+
           <td>
-            <img [src]="item.imageUrl" alt="{{item.title}}" class="menu-img"
-                 style="height: 75px; width: 75px;">
+            {{ i + 1 }}
           </td>
-          <td>{{item.title | titlecase }}</td>
-          <td>{{item.price | currency:'₺' }}</td>
+
+
           <td>
-            <span class="badge bg-info">{{item.category.categoryName}}</span>
+
+            <img
+              [src]="item.imageUrl"
+              [alt]="item.title"
+              class="menu-img rounded"
+              style="height: 75px; width: 75px; object-fit: cover;"
+            >
+
           </td>
+
+
+          <td>
+            {{ item.title | titlecase }}
+          </td>
+
+
+          <td>
+            {{ item.price | currency:'TRY':'symbol-narrow' }}
+          </td>
+
+
+          <td>
+
+            <span class="badge bg-info">
+
+              {{ item.category?.categoryName }}
+
+            </span>
+
+          </td>
+
+
           <td class="text-center">
+
             <div class="btn-group">
-              <button (click)="onSelected(item)" class="btn btn-info"
-                      data-bs-toggle="modal" data-bs-target="#editModal">
-                <i class="fas fa-edit me-1"></i> Güncelle
+
+              <button
+                type="button"
+                class="btn btn-warning btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+                (click)="onSelected(item)"
+              >
+
+                <i class="fas fa-edit me-1"></i>
+
+                Güncelle
+
               </button>
-              <button (click)="delete(item.id)" class="btn btn-danger ms-2">
-                <i class="fas fa-trash me-1"></i> Sil
+
+
+              <button
+                type="button"
+                class="btn btn-danger btn-sm ms-2"
+                (click)="delete(item.id)"
+              >
+
+                <i class="fas fa-trash me-1"></i>
+
+                Sil
+
               </button>
+
             </div>
+
           </td>
+
         </tr>
+
+
+        <tr *ngIf="menuList.length === 0">
+
+          <td
+            colspan="6"
+            class="text-center text-muted py-4"
+          >
+            Menü ürünü bulunamadı.
+          </td>
+
+        </tr>
+
       </tbody>
+
     </table>
+
   </div>
 
-  <!-- Create Modal -->
-  <div class="modal fade" id="createModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <form #createForm="ngForm" (ngSubmit)="create(); createForm.resetForm()">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Yeni Ürün Ekle</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Ürün Başlığı</label>
-                  <input type="text" name="title" class="form-control" [(ngModel)]="menu.title">
-                  <div *ngIf="errors?.Title" class="text-danger">
-                    <span *ngFor="let error of errors.Title">{{error}}</span>
-                  </div>
-                </div>
+</div>
 
-                <div class="form-group">
-                  <label class="form-label">Ürün Fiyatı</label>
-                  <input type="number" name="price" class="form-control" [(ngModel)]="menu.price">
-                  <div *ngIf="errors?.Price" class="text-danger">
-                    <span *ngFor="let error of errors.Price">{{error}}</span>
-                  </div>
-                </div>
 
-                <div class="form-group">
-                  <label class="form-label">Kategori</label>
-                  <select [(ngModel)]="menu.categoryId" name="categoryId" class="form-select">
-                    <option value="">Kategori Seçin</option>
-                    <option *ngFor="let category of categoryList" [value]="category.id">
-                      {{category.categoryName}}
-                    </option>
-                  </select>
-                  <div *ngIf="errors?.CategoryId" class="text-danger">
-                    <span *ngFor="let error of errors.CategoryId">{{error}}</span>
-                  </div>
-                </div>
-              </div>
+<!-- ========================= -->
+<!-- CREATE MODAL -->
+<!-- ========================= -->
 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Ürün Açıklaması</label>
-                  <textarea name="description" class="form-control" [(ngModel)]="menu.description"
-                           rows="4"></textarea>
-                  <div *ngIf="errors?.Description" class="text-danger">
-                    <span *ngFor="let error of errors.Description">{{error}}</span>
-                  </div>
-                </div>
+<div
+  class="modal fade"
+  id="createModal"
+  tabindex="-1"
+  aria-labelledby="createModalLabel"
+  aria-hidden="true"
+>
 
-                <div class="form-group">
-                  <label class="form-label">Ürün Resmi</label>
-                  <input type="text" name="imageUrl" [(ngModel)]="menu.imageUrl" class="form-control">
-                  <div *ngIf="errors?.ImageUrl" class="text-danger">
-                    <span *ngFor="let error of errors.ImageUrl">{{error}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-            <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid">
-              <i class="fas fa-save me-1"></i> Kaydet
-            </button>
-          </div>
+  <div class="modal-dialog modal-lg">
+
+    <form
+      #createForm="ngForm"
+      (ngSubmit)="create()"
+      novalidate
+    >
+
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+
+          <h5
+            class="modal-title"
+            id="createModalLabel"
+          >
+            Yeni Ürün Ekle
+          </h5>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+
         </div>
-      </form>
-    </div>
-  </div>
 
-  <!-- Edit Modal -->
-  <div class="modal fade" id="editModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <form #editForm="ngForm" (ngSubmit)="update()">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Ürün Güncelle</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Ürün Başlığı</label>
-                  <input type="text" name="title" class="form-control" [(ngModel)]="editMenu.title" required>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+
+          <div class="row">
+
+
+            <!-- LEFT COLUMN -->
+            <div class="col-md-6">
+
+
+              <!-- Title -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Başlığı
+                </label>
+
+                <input
+                  type="text"
+                  name="title"
+                  class="form-control"
+                  [(ngModel)]="menu.title"
+                  #title="ngModel"
+                  required
+                  minlength="3"
+                  maxlength="100"
+                >
+
+                <!-- Angular Validation -->
+                <div
+                  *ngIf="title.invalid && title.touched"
+                  class="text-danger mt-1"
+                >
+
+                  <div *ngIf="title.errors?.['required']">
+                    Ürün başlığı boş bırakılamaz.
+                  </div>
+
+                  <div *ngIf="title.errors?.['minlength']">
+                    Ürün başlığı en az 3 karakter olmalıdır.
+                  </div>
+
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label">Ürün Fiyatı</label>
-                  <input type="number" name="price" class="form-control" [(ngModel)]="editMenu.price" required>
+
+                <!-- Backend Validation -->
+                <div
+                  *ngIf="errors?.['Title']"
+                  class="text-danger mt-1"
+                >
+
+                  <div
+                    *ngFor="let error of errors['Title']"
+                  >
+                    {{ error }}
+                  </div>
+
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label">Kategori</label>
-                  <select [(ngModel)]="editMenu.categoryId" name="categoryId" class="form-select">
-                    <option *ngFor="let category of categoryList" [value]="category.id">
-                      {{category.categoryName}}
-                    </option>
-                  </select>
-                </div>
               </div>
 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Ürün Açıklaması</label>
-                  <textarea name="description" class="form-control" [(ngModel)]="editMenu.description"
-                           rows="4" required></textarea>
+
+              <!-- Price -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Fiyatı
+                </label>
+
+                <input
+                  type="number"
+                  name="price"
+                  class="form-control"
+                  [(ngModel)]="menu.price"
+                  #price="ngModel"
+                  required
+                  min="0.01"
+                >
+
+                <!-- Angular Validation -->
+                <div
+                  *ngIf="price.invalid && price.touched"
+                  class="text-danger mt-1"
+                >
+
+                  <div *ngIf="price.errors?.['required']">
+                    Ürün fiyatı boş bırakılamaz.
+                  </div>
+
+                  <div *ngIf="price.errors?.['min']">
+                    Ürün fiyatı 0'dan büyük olmalıdır.
+                  </div>
+
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label">Ürün Resmi</label>
-                  <input type="text" name="imageUrl" class="form-control" [(ngModel)]="editMenu.imageUrl" required>
+
+                <!-- Backend Validation -->
+                <div
+                  *ngIf="errors?.['Price']"
+                  class="text-danger mt-1"
+                >
+
+                  <div
+                    *ngFor="let error of errors['Price']"
+                  >
+                    {{ error }}
+                  </div>
+
                 </div>
+
               </div>
+
+
+              <!-- Category -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Kategori
+                </label>
+
+                <select
+                  name="categoryId"
+                  class="form-select"
+                  [(ngModel)]="menu.categoryId"
+                  #categoryId="ngModel"
+                  required
+                >
+
+                  <option value="">
+                    Kategori Seçin
+                  </option>
+
+                  <option
+                    *ngFor="let category of categoryList"
+                    [value]="category.id"
+                  >
+                    {{ category.categoryName }}
+                  </option>
+
+                </select>
+
+
+                <!-- Angular Validation -->
+                <div
+                  *ngIf="categoryId.invalid && categoryId.touched"
+                  class="text-danger mt-1"
+                >
+                  Kategori seçmelisiniz.
+                </div>
+
+
+                <!-- Backend Validation -->
+                <div
+                  *ngIf="errors?.['CategoryId']"
+                  class="text-danger mt-1"
+                >
+
+                  <div
+                    *ngFor="let error of errors['CategoryId']"
+                  >
+                    {{ error }}
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
+
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-md-6">
+
+
+              <!-- Description -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Açıklaması
+                </label>
+
+                <textarea
+                  name="description"
+                  class="form-control"
+                  rows="5"
+                  [(ngModel)]="menu.description"
+                  #description="ngModel"
+                  required
+                  minlength="10"
+                  maxlength="500"
+                ></textarea>
+
+
+                <!-- Angular Validation -->
+                <div
+                  *ngIf="description.invalid && description.touched"
+                  class="text-danger mt-1"
+                >
+
+                  <div *ngIf="description.errors?.['required']">
+                    Ürün açıklaması boş bırakılamaz.
+                  </div>
+
+                  <div *ngIf="description.errors?.['minlength']">
+                    Ürün açıklaması en az 10 karakter olmalıdır.
+                  </div>
+
+                </div>
+
+
+                <!-- Backend Validation -->
+                <div
+                  *ngIf="errors?.['Description']"
+                  class="text-danger mt-1"
+                >
+
+                  <div
+                    *ngFor="let error of errors['Description']"
+                  >
+                    {{ error }}
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Image URL -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Resmi
+                </label>
+
+                <input
+                  type="text"
+                  name="imageUrl"
+                  class="form-control"
+                  [(ngModel)]="menu.imageUrl"
+                  #imageUrl="ngModel"
+                  required
+                >
+
+
+                <!-- Angular Validation -->
+                <div
+                  *ngIf="imageUrl.invalid && imageUrl.touched"
+                  class="text-danger mt-1"
+                >
+                  Resim adresi boş bırakılamaz.
+                </div>
+
+
+                <!-- Backend Validation -->
+                <div
+                  *ngIf="errors?.['ImageUrl']"
+                  class="text-danger mt-1"
+                >
+
+                  <div
+                    *ngFor="let error of errors['ImageUrl']"
+                  >
+                    {{ error }}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid || !editForm.dirty">
-              <i class="fas fa-save me-1"></i> Güncelle
-            </button>
-          </div>
+
         </div>
-      </form>
-    </div>
+
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            İptal
+          </button>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="createForm.invalid"
+          >
+
+            <i class="fas fa-save me-1"></i>
+
+            Kaydet
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
   </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- EDIT MODAL -->
+<!-- ========================= -->
+
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="editModalLabel"
+  aria-hidden="true"
+>
+
+  <div class="modal-dialog modal-lg">
+
+    <form
+      #editForm="ngForm"
+      (ngSubmit)="update()"
+      novalidate
+    >
+
+      <div class="modal-content">
+
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+
+          <h5
+            class="modal-title"
+            id="editModalLabel"
+          >
+            Ürün Güncelle
+          </h5>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+
+        </div>
+
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+
+          <div class="row">
+
+
+            <!-- LEFT COLUMN -->
+            <div class="col-md-6">
+
+
+              <!-- Title -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Başlığı
+                </label>
+
+                <input
+                  type="text"
+                  name="editTitle"
+                  class="form-control"
+                  [(ngModel)]="editMenu.title"
+                  #editTitle="ngModel"
+                  required
+                  minlength="3"
+                  maxlength="100"
+                >
+
+                <div
+                  *ngIf="editTitle.invalid && editTitle.touched"
+                  class="text-danger mt-1"
+                >
+
+                  <div *ngIf="editTitle.errors?.['required']">
+                    Ürün başlığı boş bırakılamaz.
+                  </div>
+
+                  <div *ngIf="editTitle.errors?.['minlength']">
+                    Ürün başlığı en az 3 karakter olmalıdır.
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Price -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Fiyatı
+                </label>
+
+                <input
+                  type="number"
+                  name="editPrice"
+                  class="form-control"
+                  [(ngModel)]="editMenu.price"
+                  #editPrice="ngModel"
+                  required
+                  min="0.01"
+                >
+
+                <div
+                  *ngIf="editPrice.invalid && editPrice.touched"
+                  class="text-danger mt-1"
+                >
+
+                  <div *ngIf="editPrice.errors?.['required']">
+                    Ürün fiyatı boş bırakılamaz.
+                  </div>
+
+                  <div *ngIf="editPrice.errors?.['min']">
+                    Ürün fiyatı 0'dan büyük olmalıdır.
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Category -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Kategori
+                </label>
+
+                <select
+                  name="editCategoryId"
+                  class="form-select"
+                  [(ngModel)]="editMenu.categoryId"
+                  #editCategoryId="ngModel"
+                  required
+                >
+
+                  <option
+                    *ngFor="let category of categoryList"
+                    [value]="category.id"
+                  >
+                    {{ category.categoryName }}
+                  </option>
+
+                </select>
+
+
+                <div
+                  *ngIf="editCategoryId.invalid && editCategoryId.touched"
+                  class="text-danger mt-1"
+                >
+                  Kategori seçmelisiniz.
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-md-6">
+
+
+              <!-- Description -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Açıklaması
+                </label>
+
+                <textarea
+                  name="editDescription"
+                  class="form-control"
+                  rows="5"
+                  [(ngModel)]="editMenu.description"
+                  #editDescription="ngModel"
+                  required
+                  minlength="10"
+                  maxlength="500"
+                ></textarea>
+
+
+                <div
+                  *ngIf="editDescription.invalid && editDescription.touched"
+                  class="text-danger mt-1"
+                >
+
+                  <div *ngIf="editDescription.errors?.['required']">
+                    Ürün açıklaması boş bırakılamaz.
+                  </div>
+
+                  <div *ngIf="editDescription.errors?.['minlength']">
+                    Ürün açıklaması en az 10 karakter olmalıdır.
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Image URL -->
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Ürün Resmi
+                </label>
+
+                <input
+                  type="text"
+                  name="editImageUrl"
+                  class="form-control"
+                  [(ngModel)]="editMenu.imageUrl"
+                  #editImageUrl="ngModel"
+                  required
+                >
+
+
+                <div
+                  *ngIf="editImageUrl.invalid && editImageUrl.touched"
+                  class="text-danger mt-1"
+                >
+                  Resim adresi boş bırakılamaz.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            İptal
+          </button>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="editForm.invalid || !editForm.dirty"
+          >
+
+            <i class="fas fa-save me-1"></i>
+
+            Güncelle
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
 </div>

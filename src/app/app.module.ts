@@ -14,6 +14,16 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { CategoryComponent } from './admin/category/category.component';
 import { FormsModule } from '@angular/forms';
 import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
+import { FeatureComponent } from './feature/feature.component';
+import { ServiceComponent } from './service/service.component';
+import { ReservationComponent } from './reservation/reservation.component';
+import { FooterComponent } from './footer/footer.component';
+import { AdminFeatureComponent } from './admin/admin-feature/admin-feature.component';
+import { AdminServiceComponent } from './admin/admin-service/admin-service.component';
+import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
+import { AdminReservationComponent } from './admin/admin-reservation/admin-reservation.component';
+import { AdminContactInfoComponent } from './admin/admin-contact-info/admin-contact-info.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +34,16 @@ import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
     ContactComponent,
     MenuComponent,
     CategoryComponent,
-    AdminMenuComponent
+    AdminMenuComponent,
+    FeatureComponent,
+    ServiceComponent,
+    ReservationComponent,
+    FooterComponent,
+    AdminFeatureComponent,
+    AdminServiceComponent,
+    AdminAboutComponent,
+    AdminReservationComponent,
+    AdminContactInfoComponent
   ],
   imports: [
     BrowserModule,

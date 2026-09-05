@@ -1,0 +1,133 @@
+<div class="container-fluid">
+
+  <div class="mb-4">
+    <h2>Hakkımızda Yönetimi</h2>
+
+    <p class="text-muted">
+      Ana sayfadaki hakkımızda bölümünün içeriğini yönetin.
+    </p>
+  </div>
+
+  <div
+    *ngIf="successMessage"
+    class="alert alert-success"
+  >
+    {{ successMessage }}
+  </div>
+
+  <div
+    *ngIf="errorMessage"
+    class="alert alert-danger"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <div
+    *ngIf="isLoading"
+    class="text-center py-5"
+  >
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <div
+    class="card shadow-sm"
+    *ngIf="!isLoading"
+  >
+    <div class="card-body">
+
+      <form
+        #aboutForm="ngForm"
+        (ngSubmit)="saveAbout()"
+        novalidate
+      >
+
+        <div class="mb-3">
+
+          <label
+            for="title"
+            class="form-label"
+          >
+            Başlık
+          </label>
+
+          <input
+            id="title"
+            type="text"
+            class="form-control"
+            name="title"
+            [(ngModel)]="about.title"
+            #title="ngModel"
+            required
+            minlength="3"
+            maxlength="100"
+          >
+
+          <small
+            class="text-danger"
+            *ngIf="title.invalid && title.touched"
+          >
+            <span *ngIf="title.errors?.['required']">
+              Başlık boş bırakılamaz.
+            </span>
+
+            <span *ngIf="title.errors?.['minlength']">
+              Başlık en az 3 karakter olmalıdır.
+            </span>
+          </small>
+
+        </div>
+
+        <div class="mb-3">
+
+          <label
+            for="description"
+            class="form-label"
+          >
+            Açıklama
+          </label>
+
+          <textarea
+            id="description"
+            class="form-control"
+            rows="8"
+            name="description"
+            [(ngModel)]="about.description"
+            #description="ngModel"
+            required
+            minlength="10"
+            maxlength="1000"
+          ></textarea>
+
+          <small
+            class="text-danger"
+            *ngIf="description.invalid && description.touched"
+          >
+            <span *ngIf="description.errors?.['required']">
+              Açıklama boş bırakılamaz.
+            </span>
+
+            <span *ngIf="description.errors?.['minlength']">
+              Açıklama en az 10 karakter olmalıdır.
+            </span>
+          </small>
+
+          <div class="form-text">
+            {{ about.description.length }} / 1000
+          </div>
+
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="aboutForm.invalid"
+        >
+          {{ about.id > 0 ? 'Güncelle' : 'Kaydet' }}
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

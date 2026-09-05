@@ -1,0 +1,28 @@
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div
+        class="col-lg-3 col-sm-6 wow fadeInUp"
+        *ngFor="let service of services"
+      >
+        <div class="service-item rounded pt-3">
+          <div class="p-4">
+
+            <i [class]="service.icon"></i>
+
+            <h5>
+              {{ service.title }}
+            </h5>
+
+            <p>
+              {{ service.description }}
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

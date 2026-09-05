@@ -1,39 +1,170 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
 
-<html>
-  <body>
-    <div class="container-fluid">
-      <div class="row flex-nowrap">
-          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-              <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                  <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                      <span class="fs-5 d-none d-sm-inline">Admin Paneli</span>
-                  </a>
-                  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                      <li class="nav-item">
-                          <a href="#" class="nav-link align-middle px-0">
-                              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Ana Sayfa</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a routerLink="" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                              <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                      </li>
-                      <li>
-                          <a routerLink="category" routerLinkActive="category" class="nav-link px-0 align-middle">
-                              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Kategoriler</span></a>
-                      </li>
-                      <li>
-                          <a routerLink="menu" routerLinkActive="menu" class="nav-link px-0 align-middle">
-                              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Menü</span> </a>
-                      </li>
-                  </ul>
-                  <hr>
-              </div>
-          </div>
-          <div class="col py-3">
-             <router-outlet></router-outlet>
-          </div>
+    <!-- Sidebar -->
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start
+               px-3 pt-2 text-white min-vh-100"
+      >
+
+        <!-- Admin Title -->
+        <a
+          href="/"
+          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto
+                 text-white text-decoration-none"
+        >
+          <span class="fs-5 d-none d-sm-inline">
+            Admin Paneli
+          </span>
+        </a>
+
+        <!-- Menu -->
+        <ul
+          class="nav nav-pills flex-column mb-sm-auto mb-0
+                 align-items-center align-items-sm-start"
+          id="menu"
+        >
+
+          <!-- Home -->
+          <li class="nav-item">
+            <a
+              href="/"
+              class="nav-link align-middle px-0"
+            >
+              <i class="fs-4 bi-house"></i>
+
+              <span class="ms-1 d-none d-sm-inline">
+                Ana Sayfa
+              </span>
+            </a>
+          </li>
+
+          <!-- Dashboard -->
+          <li>
+            <a
+              routerLink=""
+              class="nav-link px-0 align-middle"
+            >
+              <i class="fs-4 bi-speedometer2"></i>
+
+              <span class="ms-1 d-none d-sm-inline">
+                Dashboard
+              </span>
+            </a>
+          </li>
+
+          <!-- Categories -->
+          <li>
+            <a
+              routerLink="category"
+              routerLinkActive="active"
+              class="nav-link px-0 align-middle"
+            >
+              <i class="fs-4 bi-table"></i>
+
+              <span class="ms-1 d-none d-sm-inline">
+                Kategoriler
+              </span>
+            </a>
+          </li>
+
+          <!-- Menu -->
+          <li>
+            <a
+              routerLink="menu"
+              routerLinkActive="active"
+              class="nav-link px-0 align-middle"
+            >
+              <i class="fs-4 bi-card-list"></i>
+
+              <span class="ms-1 d-none d-sm-inline">
+                Menü
+              </span>
+            </a>
+          </li>
+
+          <!-- Feature -->
+          <li>
+            <a
+              routerLink="feature"
+              routerLinkActive="active"
+              class="nav-link px-0 align-middle"
+            >
+              <i class="fs-4 bi-star"></i>
+
+              <span class="ms-1 d-none d-sm-inline">
+                Öne Çıkan Alan
+              </span>
+            </a>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a
+              routerLink="service"
+              routerLinkActive="active"
+              class="nav-link px-0 align-middle"
+            >
+              <i class="fs-4 bi-grid"></i>
+
+              <span class="ms-1 d-none d-sm-inline">
+                Hizmetler
+              </span>
+            </a>
+          </li>
+
+          <!-- About -->
+          <li>
+            <a
+              routerLink="about"
+              routerLinkActive="active"
+              class="nav-link px-0 align-middle"
+            >
+              <i class="fs-4 bi-info-circle"></i>
+
+              <span class="ms-1 d-none d-sm-inline">
+                Hakkımızda
+              </span>
+            </a>
+          </li>
+          <li>
+  <a
+    routerLink="contact-info"
+    routerLinkActive="active"
+    class="nav-link px-0 align-middle"
+  >
+    <i class="fs-4 bi-geo-alt"></i>
+
+    <span class="ms-1 d-none d-sm-inline">
+      İletişim Bilgileri
+    </span>
+  </a>
+</li>
+<li>
+  <a
+    routerLink="reservation"
+    routerLinkActive="active"
+    class="nav-link px-0 align-middle"
+  >
+    <i class="fs-4 bi-calendar-check"></i>
+
+    <span class="ms-1 d-none d-sm-inline">
+      Rezervasyonlar
+    </span>
+  </a>
+</li>
+        </ul>
+
+        <hr>
+
       </div>
     </div>
-  </body>
-</html>
+
+    <!-- Content -->
+    <div class="col py-3">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

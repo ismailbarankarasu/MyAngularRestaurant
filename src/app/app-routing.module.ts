@@ -8,6 +8,11 @@ import { ContactComponent } from './contact/contact.component';
 import { MenuComponent } from './menu/menu.component';
 import { CategoryComponent } from './admin/category/category.component';
 import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
+import { AdminFeatureComponent } from './admin/admin-feature/admin-feature.component';
+import { AdminServiceComponent } from './admin/admin-service/admin-service.component';
+import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
+import { AdminReservationComponent } from './admin/admin-reservation/admin-reservation.component';
+import { AdminContactInfoComponent } from './admin/admin-contact-info/admin-contact-info.component';
 const routes: Routes =
 [
   {//Main route yapılandırması
@@ -20,8 +25,13 @@ const routes: Routes =
 {
   path:'admin', component:AdminLayoutComponent,
   children: [
-    {path:'category', component:CategoryComponent},
-    {path:'menu', component:AdminMenuComponent}
+    { path:'category', component:CategoryComponent},
+    { path:'menu', component:AdminMenuComponent},
+    { path: 'feature', component: AdminFeatureComponent },
+    { path: 'service', component: AdminServiceComponent },
+    { path: 'about', component: AdminAboutComponent },
+    { path: 'reservation', component: AdminReservationComponent },
+    { path: 'contact-info', component: AdminContactInfoComponent }
   ]
 }
 ];

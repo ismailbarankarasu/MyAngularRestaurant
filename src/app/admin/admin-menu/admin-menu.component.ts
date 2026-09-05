@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+
 import { MenuService } from '../../_services/menu.service';
 import { MenuModel } from '../../_models/menu';
-import Swal from 'sweetalert2';
+
 import { CategoryService } from '../../_services/category.service';
 import { CategoryModel } from '../../_models/category';
-
 
 @Component({
   selector: 'app-admin-menu',
@@ -12,100 +13,157 @@ import { CategoryModel } from '../../_models/category';
   templateUrl: './admin-menu.component.html',
   styleUrl: './admin-menu.component.css'
 })
-export class AdminMenuComponent {
-  menuList : MenuModel[];
-  menu: MenuModel= new MenuModel();
-  editMenu: any = {};
-  categoryList : CategoryModel[];
-  errors: any = {};
+export class AdminMenuComponent implements OnInit {
 
-  constructor(private menuService: MenuService,
-            private categoryService: CategoryService
-  ){
-  this.getAll();
-  this.getCategories();
+  menuList: MenuModel[] = [];
+  categoryList: CategoryModel[] = [];
+
+  menu: MenuModel = new MenuModel();
+  editMenu: MenuModel = new MenuModel();
+
+  errors: Record<string, string[]> = {};
+
+  constructor(
+    private menuService: MenuService,
+    private categoryService: CategoryService
+  ) { }
+
+  ngOnInit(): void {
+    this.getAll();
+    this.getCategories();
   }
 
-  getAll(){
-  this.menuService.getAll().subscribe({
-   next: values=> this.menuList=values,
-   error:err=> console.log(err)
-   })
- }
+  getAll(): void {
+    this.menuService.getAll().subscribe({
+      next: (values) => {
+        this.menuList = values;
+      },
+      error: (err) => {
+        console.error('Menü ürünleri alınamadı:', err);
 
-  getCategories(){
-    this.categoryService.getCategories().subscribe({
-    next: values => this.categoryList=values,
-    error:err=> console.log(err)
-  })
-}
-
-
-
-  delete(id){
-   Swal.fire({
-      title: "Silmek istediğinize emin misiniz?",
-      text: "Bu işlemi geri alamazsınız!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-     cancelButtonColor: "#d33",
-     confirmButtonText: "Evet, Sil!",
-     cancelButtonText: 'İptal'
-   }).then((result) => {
-     if (result.isConfirmed) {
-       this.menuService.delete(id).subscribe({
-          error:err=> console.log(err),
-          complete: () => { Swal.fire({
-            title: "Silme işlemi başarılı!",
-            text: id+ "numaralı Id'ye Sahip Ürün Silindi",
-            icon: "success"
-         }).then(() => this.getAll())
-         }
-       })
+        Swal.fire({
+          title: 'Hata',
+          text: 'Menü ürünleri alınırken bir hata oluştu.',
+          icon: 'error'
+        });
       }
     });
   }
 
-  onSelected(model){
-    this.editMenu=model;
-  }
-
-  update(){
-    this.menuService.update(this.editMenu.id,this.editMenu).subscribe({
-     error:err=> {
-      if(err.status === 400){
-        console.log(err.error.errors)
-        this.errors = err.error.errors
+  getCategories(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (values) => {
+        this.categoryList = values;
+      },
+      error: (err) => {
+        console.error('Kategoriler alınamadı:', err);
       }
-    },
-     complete: () =>  Swal.fire({
-        title: "Güncelleme işlemi başarılı!",
-        text:"Ürün Başarıyla Güncellendi",
-        icon: "success"
-      }).then(()=> this.getAll())
-   })
+    });
   }
 
-  create(){
-   this.menuService.create(this.menu).subscribe({
-    next : value => {
-      this.menu = new MenuModel();
-      this.errors = {};
-      this.getAll()
-    },
-    error: err=> {
-      if(err.status === 400){
-        console.log(err.error.errors)
-        this.errors = err.error.errors
+  create(): void {
+    this.errors = {};
+
+    this.menuService.create(this.menu).subscribe({
+      next: () => {
+        this.menu = new MenuModel();
+
+        this.getAll();
+
+        Swal.fire({
+          title: 'Ürün ekleme başarılı!',
+          text: 'Ürün başarıyla kaydedildi.',
+          icon: 'success'
+        });
+      },
+      error: (err) => {
+        this.handleValidationErrors(err);
       }
-    },
-    complete: () =>  Swal.fire({
-      title: "Ürün ekleme başarılı!",
-      text:"Ürün Başarıyla Kaydedildi",
-      icon: "success"
-     }).then(() => location.reload())
-    })
+    });
   }
 
+  onSelected(model: MenuModel): void {
+    this.editMenu = { ...model };
+    this.errors = {};
+  }
+
+  update(): void {
+    this.errors = {};
+
+    this.menuService
+      .update(this.editMenu.id, this.editMenu)
+      .subscribe({
+        next: () => {
+          this.getAll();
+
+          Swal.fire({
+            title: 'Güncelleme başarılı!',
+            text: 'Ürün başarıyla güncellendi.',
+            icon: 'success'
+          });
+        },
+        error: (err) => {
+          this.handleValidationErrors(err);
+        }
+      });
+  }
+
+  delete(id: number): void {
+    Swal.fire({
+      title: 'Silmek istediğinize emin misiniz?',
+      text: 'Bu işlemi geri alamazsınız!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Evet, Sil!',
+      cancelButtonText: 'İptal'
+    }).then((result) => {
+
+      if (!result.isConfirmed) {
+        return;
+      }
+
+      this.menuService.delete(id).subscribe({
+        next: () => {
+
+          this.getAll();
+
+          Swal.fire({
+            title: 'Silme işlemi başarılı!',
+            text: `${id} numaralı ürün silindi.`,
+            icon: 'success'
+          });
+
+        },
+        error: (err) => {
+
+          console.error('Ürün silinemedi:', err);
+
+          Swal.fire({
+            title: 'Hata',
+            text: 'Ürün silinirken bir hata oluştu.',
+            icon: 'error'
+          });
+
+        }
+      });
+
+    });
+  }
+
+  private handleValidationErrors(err: any): void {
+    if (err.status === 400 && err.error?.errors) {
+      this.errors = err.error.errors;
+      return;
+    }
+
+    console.error(err);
+
+    Swal.fire({
+      title: 'Hata',
+      text: 'İşlem sırasında beklenmeyen bir hata oluştu.',
+      icon: 'error'
+    });
+  }
 }
