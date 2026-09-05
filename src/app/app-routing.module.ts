@@ -7,22 +7,21 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MenuComponent } from './menu/menu.component';
 import { CategoryComponent } from './admin/category/category.component';
-
+import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
 const routes: Routes =
 [
   {//Main route yapılandırması
   path:'', component: MainLayoutComponent,
   children: [
-    { path:'about', component:AboutComponent},
-    { path:'contact', component:ContactComponent},
-    { path:'menu', component:MenuComponent}
+
   ]
 },
 //Admin route yapılandırması
 {
   path:'admin', component:AdminLayoutComponent,
   children: [
-    {path:'category', component:CategoryComponent}
+    {path:'category', component:CategoryComponent},
+    {path:'menu', component:AdminMenuComponent}
   ]
 }
 ];
