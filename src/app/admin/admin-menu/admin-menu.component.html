@@ -468,46 +468,46 @@
 
 
               <!-- Image URL -->
-              <div class="mb-3">
+<!-- Product Image -->
+<div class="mb-3">
 
-                <label class="form-label">
-                  Ürün Resmi
-                </label>
+  <label class="form-label">
+    Ürün Resmi
+  </label>
 
-                <input
-                  type="text"
-                  name="imageUrl"
-                  class="form-control"
-                  [(ngModel)]="menu.imageUrl"
-                  #imageUrl="ngModel"
-                  required
-                >
+  <!-- Image Preview -->
+  <div
+    *ngIf="menu.imageUrl"
+    class="product-image-preview"
+  >
+    <img
+      [src]="menu.imageUrl"
+      alt="Ürün Resmi"
+      class="product-preview-img"
+    >
+  </div>
 
+  <!-- Image Not Found -->
+  <div
+    *ngIf="!menu.imageUrl"
+    class="text-muted mt-2"
+  >
+    Ürün görseli bulunamadı.
+  </div>
 
-                <!-- Angular Validation -->
-                <div
-                  *ngIf="imageUrl.invalid && imageUrl.touched"
-                  class="text-danger mt-1"
-                >
-                  Resim adresi boş bırakılamaz.
-                </div>
+  <!-- Backend Validation -->
+  <div
+    *ngIf="errors?.['ImageUrl']"
+    class="text-danger mt-1"
+  >
+    <div
+      *ngFor="let error of errors['ImageUrl']"
+    >
+      {{ error }}
+    </div>
+  </div>
 
-
-                <!-- Backend Validation -->
-                <div
-                  *ngIf="errors?.['ImageUrl']"
-                  class="text-danger mt-1"
-                >
-
-                  <div
-                    *ngFor="let error of errors['ImageUrl']"
-                  >
-                    {{ error }}
-                  </div>
-
-                </div>
-
-              </div>
+</div>
 
             </div>
 
