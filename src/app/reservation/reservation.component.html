@@ -1,34 +1,30 @@
-<div
-  class="container-xxl py-5 px-0 wow fadeInUp"
-  id="reservation"
-  data-wow-delay="0.1s"
->
+<div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
   <div class="row g-0">
 
+    <!-- Sol Görsel Alanı -->
     <div class="col-md-6">
-      <div class="video">
-        <button
-          type="button"
-          class="btn-play"
-          data-bs-toggle="modal"
-          data-bs-target="#videoModal"
+      <div class="reservation-image h-100">
+        <img
+          src="https://www.protel.com.tr/blog/wp-content/uploads/2021/09/masa-rezervasyon.jpg"
+          alt="Restoran Rezervasyon"
+          class="w-100 h-100"
         >
-          <span></span>
-        </button>
       </div>
     </div>
 
+    <!-- Rezervasyon Formu -->
     <div class="col-md-6 bg-dark d-flex align-items-center">
       <div class="p-5 wow fadeInUp w-100" data-wow-delay="0.2s">
 
         <h5 class="section-title ff-secondary text-start text-primary fw-normal">
-          Reservation
+          Rezervasyon
         </h5>
 
         <h1 class="text-white mb-4">
-          Book A Table Online
+          Online Masa Rezervasyonu
         </h1>
 
+        <!-- Başarılı Mesaj -->
         <div
           *ngIf="successMessage"
           class="alert alert-success"
@@ -36,6 +32,7 @@
           {{ successMessage }}
         </div>
 
+        <!-- Hata Mesajı -->
         <div
           *ngIf="errorMessage"
           class="alert alert-danger"
@@ -48,9 +45,12 @@
           (ngSubmit)="createReservation(reservationForm)"
           novalidate
         >
+
           <div class="row g-3">
 
+            <!-- Ad Soyad -->
             <div class="col-md-6">
+
               <div class="form-floating">
 
                 <input
@@ -58,35 +58,32 @@
                   class="form-control"
                   id="name"
                   name="name"
-                  placeholder="Your Name"
+                  placeholder="Adınız Soyadınız"
                   [(ngModel)]="reservation.name"
                   #name="ngModel"
                   required
                   minlength="3"
-                  maxlength="100"
                 >
 
                 <label for="name">
-                  Your Name
+                  Adınız Soyadınız
                 </label>
 
               </div>
 
-              <small
-                class="text-danger"
+              <div
                 *ngIf="name.invalid && name.touched"
+                class="text-warning small mt-1"
               >
-                <span *ngIf="name.errors?.['required']">
-                  Ad soyad boş bırakılamaz.
-                </span>
+                Ad soyad en az 3 karakter olmalıdır.
+              </div>
 
-                <span *ngIf="name.errors?.['minlength']">
-                  Ad soyad en az 3 karakter olmalıdır.
-                </span>
-              </small>
             </div>
 
+
+            <!-- E-posta -->
             <div class="col-md-6">
+
               <div class="form-floating">
 
                 <input
@@ -94,7 +91,7 @@
                   class="form-control"
                   id="email"
                   name="email"
-                  placeholder="Your Email"
+                  placeholder="E-posta Adresiniz"
                   [(ngModel)]="reservation.email"
                   #email="ngModel"
                   required
@@ -102,26 +99,24 @@
                 >
 
                 <label for="email">
-                  Your Email
+                  E-posta Adresiniz
                 </label>
 
               </div>
 
-              <small
-                class="text-danger"
+              <div
                 *ngIf="email.invalid && email.touched"
+                class="text-warning small mt-1"
               >
-                <span *ngIf="email.errors?.['required']">
-                  Email adresi boş bırakılamaz.
-                </span>
+                Geçerli bir e-posta adresi giriniz.
+              </div>
 
-                <span *ngIf="email.errors?.['email']">
-                  Geçerli bir email adresi giriniz.
-                </span>
-              </small>
             </div>
 
+
+            <!-- Tarih ve Saat -->
             <div class="col-md-6">
+
               <div class="form-floating">
 
                 <input
@@ -135,20 +130,24 @@
                 >
 
                 <label for="reservationDate">
-                  Date & Time
+                  Tarih ve Saat
                 </label>
 
               </div>
 
-              <small
-                class="text-danger"
+              <div
                 *ngIf="reservationDate.invalid && reservationDate.touched"
+                class="text-warning small mt-1"
               >
-                Rezervasyon tarihi boş bırakılamaz.
-              </small>
+                Rezervasyon tarihi seçmelisiniz.
+              </div>
+
             </div>
 
+
+            <!-- Kişi Sayısı -->
             <div class="col-md-6">
+
               <div class="form-floating">
 
                 <select
@@ -158,54 +157,55 @@
                   [(ngModel)]="reservation.personCount"
                   #personCount="ngModel"
                   required
-                  min="1"
-                  max="20"
                 >
-                  <option [ngValue]="1">1 Person</option>
-                  <option [ngValue]="2">2 People</option>
-                  <option [ngValue]="3">3 People</option>
-                  <option [ngValue]="4">4 People</option>
-                  <option [ngValue]="5">5 People</option>
-                  <option [ngValue]="6">6 People</option>
-                  <option [ngValue]="7">7 People</option>
-                  <option [ngValue]="8">8 People</option>
+
+                  <option [ngValue]="1">1 Kişi</option>
+                  <option [ngValue]="2">2 Kişi</option>
+                  <option [ngValue]="3">3 Kişi</option>
+                  <option [ngValue]="4">4 Kişi</option>
+                  <option [ngValue]="5">5 Kişi</option>
+                  <option [ngValue]="6">6 Kişi</option>
+                  <option [ngValue]="7">7 Kişi</option>
+                  <option [ngValue]="8">8 Kişi</option>
+                  <option [ngValue]="9">9 Kişi</option>
+                  <option [ngValue]="10">10 Kişi</option>
+
                 </select>
 
                 <label for="personCount">
-                  No Of People
+                  Kişi Sayısı
                 </label>
 
               </div>
+
             </div>
 
+
+            <!-- Özel İstek -->
             <div class="col-12">
+
               <div class="form-floating">
 
                 <textarea
                   class="form-control"
-                  placeholder="Special Request"
+                  placeholder="Özel İsteğiniz"
                   id="specialRequest"
                   name="specialRequest"
-                  style="height: 100px"
                   [(ngModel)]="reservation.specialRequest"
-                  #specialRequest="ngModel"
                   maxlength="500"
+                  style="height: 100px;"
                 ></textarea>
 
                 <label for="specialRequest">
-                  Special Request
+                  Özel İsteğiniz
                 </label>
 
               </div>
 
-              <small
-                class="text-danger"
-                *ngIf="specialRequest.errors?.['maxlength'] && specialRequest.touched"
-              >
-                Özel istek en fazla 500 karakter olabilir.
-              </small>
             </div>
 
+
+            <!-- Submit -->
             <div class="col-12">
 
               <button
@@ -213,12 +213,21 @@
                 type="submit"
                 [disabled]="isSubmitting"
               >
-                {{ isSubmitting ? 'Please Wait...' : 'Book Now' }}
+
+                <span *ngIf="!isSubmitting">
+                  Rezervasyon Yap
+                </span>
+
+                <span *ngIf="isSubmitting">
+                  Rezervasyon Oluşturuluyor...
+                </span>
+
               </button>
 
             </div>
 
           </div>
+
         </form>
 
       </div>

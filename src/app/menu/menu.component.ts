@@ -25,4 +25,32 @@ selectTab(tabId: number): void {
   this.selectedTab = tabId;
 
 }
+getCategoryIcon(categoryName: string): string {
+  switch (categoryName.toLocaleLowerCase('tr-TR')) {
+
+    case 'fast food':
+      return 'fa-hamburger';
+
+    case 'içecekler':
+      return 'fa-glass-martini-alt';
+
+    case 'ara sıcaklar':
+      return 'fa-drumstick-bite';
+
+    case 'çorbalar':
+      return 'fa-utensil-spoon';
+
+    case 'makarnalar':
+      return 'fa-utensils';
+
+    case 'tatlılar':
+      return 'fa-birthday-cake';
+
+    case 'salatalar':
+      return 'fa-leaf';
+
+    default:
+      return 'fa-utensils';
+  }
+}
 }

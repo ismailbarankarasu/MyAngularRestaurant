@@ -1,0 +1,16 @@
+.reservation-image {
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.reservation-image img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 767.98px) {
+  .reservation-image {
+    min-height: 300px;
+  }
+}
