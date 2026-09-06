@@ -754,30 +754,34 @@
 
 
               <!-- Image URL -->
-              <div class="mb-3">
+<div class="mb-3">
 
-                <label class="form-label">
-                  Ürün Resmi
-                </label>
+  <label class="form-label">
+    Ürün Resmi
+  </label>
 
-                <input
-                  type="text"
-                  name="editImageUrl"
-                  class="form-control"
-                  [(ngModel)]="editMenu.imageUrl"
-                  #editImageUrl="ngModel"
-                  required
-                >
+  <!-- Mevcut Ürün Görseli -->
+  <div
+    *ngIf="editMenu.imageUrl"
+    class="product-image-preview"
+  >
+    <img
+      [src]="editMenu.imageUrl"
+      alt="Ürün Resmi"
+      class="product-preview-img"
+    >
+  </div>
 
+  <!-- Görsel Yoksa -->
+  <div
+    *ngIf="!editMenu.imageUrl"
+    class="product-image-empty"
+  >
+    <i class="bi bi-image"></i>
+    <span>Ürün görseli bulunamadı.</span>
+  </div>
 
-                <div
-                  *ngIf="editImageUrl.invalid && editImageUrl.touched"
-                  class="text-danger mt-1"
-                >
-                  Resim adresi boş bırakılamaz.
-                </div>
-
-              </div>
+</div>
 
             </div>
 
