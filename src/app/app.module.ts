@@ -24,6 +24,8 @@ import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
 import { AdminReservationComponent } from './admin/admin-reservation/admin-reservation.component';
 import { AdminContactInfoComponent } from './admin/admin-contact-info/admin-contact-info.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     AdminAboutComponent,
     AdminReservationComponent,
     AdminContactInfoComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    RegisterComponent
   ],
 imports: [
   BrowserModule,

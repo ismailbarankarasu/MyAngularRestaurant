@@ -1,0 +1,95 @@
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="auth-brand">
+      <div class="brand-icon">
+        <i class="fa fa-utensils"></i>
+      </div>
+
+      <h2>Restoran</h2>
+      <p>Yönetim Paneli</p>
+    </div>
+
+    <div class="auth-header">
+      <h3>Giriş Yap</h3>
+      <p>Yönetim paneline erişmek için hesabınıza giriş yapın.</p>
+    </div>
+
+    <div
+      *ngIf="errorMessage"
+      class="alert alert-danger"
+    >
+      {{ errorMessage }}
+    </div>
+
+    <form
+      #loginForm="ngForm"
+      (ngSubmit)="login()"
+    >
+
+      <div class="mb-3">
+        <label class="form-label">
+          E-posta Adresi
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="model.email"
+          placeholder="ornek@email.com"
+          required
+          email
+        >
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">
+          Şifre
+        </label>
+
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="model.password"
+          placeholder="Şifrenizi girin"
+          required
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100 auth-button"
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        <span *ngIf="!isLoading">
+          <i class="bi bi-box-arrow-in-right me-2"></i>
+          Giriş Yap
+        </span>
+
+        <span *ngIf="isLoading">
+          Giriş yapılıyor...
+        </span>
+      </button>
+
+    </form>
+
+    <div class="auth-footer">
+      Hesabınız yok mu?
+      <a routerLink="/register">
+        Kayıt Ol
+      </a>
+    </div>
+
+    <div class="back-home">
+      <a routerLink="/">
+        <i class="bi bi-arrow-left me-1"></i>
+        Ana Sayfaya Dön
+      </a>
+    </div>
+
+  </div>
+
+</div>

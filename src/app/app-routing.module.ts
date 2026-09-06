@@ -14,17 +14,19 @@ import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
 import { AdminReservationComponent } from './admin/admin-reservation/admin-reservation.component';
 import { AdminContactInfoComponent } from './admin/admin-contact-info/admin-contact-info.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 const routes: Routes =
 [
-  {//Main route yapılandırması
-  path:'', component: MainLayoutComponent,
-  children: [
-
-  ]
-},
+  //Main route yapılandırması
+  { path:'', component: MainLayoutComponent,},
+{ path: 'login', component: LoginComponent},
+{ path: 'register', component: RegisterComponent},
 //Admin route yapılandırması
 {
   path:'admin', component:AdminLayoutComponent,
+  canActivate: [AuthGuard],
   children: [
     { path:'category', component:CategoryComponent},
     { path:'menu', component:AdminMenuComponent},
@@ -33,8 +35,9 @@ const routes: Routes =
     { path: 'about', component: AdminAboutComponent },
     { path: 'reservation', component: AdminReservationComponent },
     { path: 'contact-info', component: AdminContactInfoComponent },
-    { path: '', component: DashboardComponent }
+    { path: '', component: DashboardComponent },
   ]
+
 }
 ];
 

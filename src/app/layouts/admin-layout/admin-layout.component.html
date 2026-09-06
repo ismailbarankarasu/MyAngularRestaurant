@@ -92,7 +92,14 @@
         <i class="bi bi-geo-alt-fill"></i>
         <span>İletişim Bilgileri</span>
       </a>
-
+<button
+  type="button"
+  class="btn btn-outline-danger w-100"
+  (click)="logout()"
+>
+  <i class="bi bi-box-arrow-right me-2"></i>
+  Çıkış Yap
+</button>
     </nav>
 
     <div class="sidebar-footer">
@@ -133,8 +140,8 @@
         </div>
 
         <div class="profile-text">
-          <strong>Yönetici</strong>
-          <span>Admin</span>
+          <strong>{{ currentUser?.nameSurname }}</strong>
+          <span>{{ currentUser?.email }}</span>
         </div>
 
       </div>

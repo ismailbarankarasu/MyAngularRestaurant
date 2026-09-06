@@ -1,0 +1,156 @@
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="auth-brand">
+
+      <div class="brand-icon">
+        <i class="fa fa-utensils"></i>
+      </div>
+
+      <h2>Restoran</h2>
+      <p>Yeni Hesap Oluştur</p>
+
+    </div>
+
+    <div class="auth-header">
+      <h3>Kayıt Ol</h3>
+      <p>
+        Hesabınızı oluşturarak yönetim sistemine giriş yapabilirsiniz.
+      </p>
+    </div>
+
+    <div
+      *ngIf="errorMessage"
+      class="alert alert-danger"
+    >
+      {{ errorMessage }}
+    </div>
+
+    <form
+      #registerForm="ngForm"
+      (ngSubmit)="register()"
+    >
+
+      <!-- Name -->
+      <div class="mb-3">
+
+        <label class="form-label">
+          Ad Soyad
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="nameSurname"
+          [(ngModel)]="model.nameSurname"
+          placeholder="Adınız Soyadınız"
+          required
+          minlength="3"
+        >
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="mb-3">
+
+        <label class="form-label">
+          E-posta Adresi
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="model.email"
+          placeholder="ornek@email.com"
+          required
+          email
+        >
+
+      </div>
+
+
+      <!-- Password -->
+      <div class="mb-3">
+
+        <label class="form-label">
+          Şifre
+        </label>
+
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="model.password"
+          placeholder="En az 6 karakter"
+          required
+          minlength="6"
+        >
+
+      </div>
+
+
+      <!-- Confirm Password -->
+      <div class="mb-4">
+
+        <label class="form-label">
+          Şifre Tekrar
+        </label>
+
+        <input
+          type="password"
+          class="form-control"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          placeholder="Şifrenizi tekrar girin"
+          required
+        >
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100 auth-button"
+        [disabled]="registerForm.invalid || isLoading"
+      >
+
+        <span *ngIf="!isLoading">
+          <i class="bi bi-person-plus-fill me-2"></i>
+          Kayıt Ol
+        </span>
+
+        <span *ngIf="isLoading">
+          Hesap oluşturuluyor...
+        </span>
+
+      </button>
+
+    </form>
+
+
+    <div class="auth-footer">
+
+      Zaten hesabınız var mı?
+
+      <a routerLink="/login">
+        Giriş Yap
+      </a>
+
+    </div>
+
+
+    <div class="back-home">
+
+      <a routerLink="/">
+        <i class="bi bi-arrow-left me-1"></i>
+        Ana Sayfaya Dön
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
