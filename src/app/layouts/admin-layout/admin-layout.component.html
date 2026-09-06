@@ -1,170 +1,152 @@
-<div class="container-fluid">
-  <div class="row flex-nowrap">
+<div class="admin-shell">
 
-    <!-- Sidebar -->
-    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-      <div
-        class="d-flex flex-column align-items-center align-items-sm-start
-               px-3 pt-2 text-white min-vh-100"
-      >
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
 
-        <!-- Admin Title -->
-        <a
-          href="/"
-          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto
-                 text-white text-decoration-none"
-        >
-          <span class="fs-5 d-none d-sm-inline">
-            Admin Paneli
-          </span>
-        </a>
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <i class="fa fa-utensils"></i>
+      </div>
 
-        <!-- Menu -->
-        <ul
-          class="nav nav-pills flex-column mb-sm-auto mb-0
-                 align-items-center align-items-sm-start"
-          id="menu"
-        >
-
-          <!-- Home -->
-          <li class="nav-item">
-            <a
-              href="/"
-              class="nav-link align-middle px-0"
-            >
-              <i class="fs-4 bi-house"></i>
-
-              <span class="ms-1 d-none d-sm-inline">
-                Ana Sayfa
-              </span>
-            </a>
-          </li>
-
-          <!-- Dashboard -->
-          <li>
-            <a
-              routerLink=""
-              class="nav-link px-0 align-middle"
-            >
-              <i class="fs-4 bi-speedometer2"></i>
-
-              <span class="ms-1 d-none d-sm-inline">
-                Dashboard
-              </span>
-            </a>
-          </li>
-
-          <!-- Categories -->
-          <li>
-            <a
-              routerLink="category"
-              routerLinkActive="active"
-              class="nav-link px-0 align-middle"
-            >
-              <i class="fs-4 bi-table"></i>
-
-              <span class="ms-1 d-none d-sm-inline">
-                Kategoriler
-              </span>
-            </a>
-          </li>
-
-          <!-- Menu -->
-          <li>
-            <a
-              routerLink="menu"
-              routerLinkActive="active"
-              class="nav-link px-0 align-middle"
-            >
-              <i class="fs-4 bi-card-list"></i>
-
-              <span class="ms-1 d-none d-sm-inline">
-                Menü
-              </span>
-            </a>
-          </li>
-
-          <!-- Feature -->
-          <li>
-            <a
-              routerLink="feature"
-              routerLinkActive="active"
-              class="nav-link px-0 align-middle"
-            >
-              <i class="fs-4 bi-star"></i>
-
-              <span class="ms-1 d-none d-sm-inline">
-                Öne Çıkan Alan
-              </span>
-            </a>
-          </li>
-
-          <!-- Services -->
-          <li>
-            <a
-              routerLink="service"
-              routerLinkActive="active"
-              class="nav-link px-0 align-middle"
-            >
-              <i class="fs-4 bi-grid"></i>
-
-              <span class="ms-1 d-none d-sm-inline">
-                Hizmetler
-              </span>
-            </a>
-          </li>
-
-          <!-- About -->
-          <li>
-            <a
-              routerLink="about"
-              routerLinkActive="active"
-              class="nav-link px-0 align-middle"
-            >
-              <i class="fs-4 bi-info-circle"></i>
-
-              <span class="ms-1 d-none d-sm-inline">
-                Hakkımızda
-              </span>
-            </a>
-          </li>
-          <li>
-  <a
-    routerLink="contact-info"
-    routerLinkActive="active"
-    class="nav-link px-0 align-middle"
-  >
-    <i class="fs-4 bi-geo-alt"></i>
-
-    <span class="ms-1 d-none d-sm-inline">
-      İletişim Bilgileri
-    </span>
-  </a>
-</li>
-<li>
-  <a
-    routerLink="reservation"
-    routerLinkActive="active"
-    class="nav-link px-0 align-middle"
-  >
-    <i class="fs-4 bi-calendar-check"></i>
-
-    <span class="ms-1 d-none d-sm-inline">
-      Rezervasyonlar
-    </span>
-  </a>
-</li>
-        </ul>
-
-        <hr>
-
+      <div>
+        <h4>Restoran</h4>
+        <span>Yönetim Paneli</span>
       </div>
     </div>
 
-    <!-- Content -->
-    <div class="col py-3">
-      <router-outlet></router-outlet>
+    <div class="sidebar-section-title">
+      MENÜ
     </div>
 
-  </div>
+    <nav class="sidebar-nav">
+
+      <a
+        routerLink="/admin"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="sidebar-link"
+      >
+        <i class="bi bi-grid-1x2-fill"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        routerLink="category"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <i class="bi bi-tags-fill"></i>
+        <span>Kategoriler</span>
+      </a>
+
+      <a
+        routerLink="menu"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <i class="bi bi-card-list"></i>
+        <span>Menü Yönetimi</span>
+      </a>
+
+      <a
+        routerLink="feature"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <i class="bi bi-stars"></i>
+        <span>Öne Çıkan Alan</span>
+      </a>
+
+      <a
+        routerLink="service"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <i class="bi bi-grid-fill"></i>
+        <span>Hizmetler</span>
+      </a>
+
+      <a
+        routerLink="about"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <i class="bi bi-info-circle-fill"></i>
+        <span>Hakkımızda</span>
+      </a>
+
+      <a
+        routerLink="reservation"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <i class="bi bi-calendar-check-fill"></i>
+        <span>Rezervasyonlar</span>
+      </a>
+
+      <a
+        routerLink="contact-info"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <i class="bi bi-geo-alt-fill"></i>
+        <span>İletişim Bilgileri</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+      <a
+        href="/"
+        class="site-link"
+      >
+        <i class="bi bi-box-arrow-up-right"></i>
+        <span>Siteyi Görüntüle</span>
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- Main -->
+  <main class="admin-main">
+
+    <!-- Header -->
+    <header class="admin-header">
+
+      <div>
+        <h5 class="header-title">
+          Yönetim Paneli
+        </h5>
+
+        <span class="header-subtitle">
+          Restoran içeriklerini ve rezervasyonlarını yönetin
+        </span>
+      </div>
+
+      <div class="admin-profile">
+
+        <div class="profile-icon">
+          <i class="bi bi-person-fill"></i>
+        </div>
+
+        <div class="profile-text">
+          <strong>Yönetici</strong>
+          <span>Admin</span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Page Content -->
+    <section class="admin-content">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+
 </div>

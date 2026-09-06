@@ -13,6 +13,7 @@ import { AdminServiceComponent } from './admin/admin-service/admin-service.compo
 import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
 import { AdminReservationComponent } from './admin/admin-reservation/admin-reservation.component';
 import { AdminContactInfoComponent } from './admin/admin-contact-info/admin-contact-info.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 const routes: Routes =
 [
   {//Main route yapılandırması
@@ -31,7 +32,8 @@ const routes: Routes =
     { path: 'service', component: AdminServiceComponent },
     { path: 'about', component: AdminAboutComponent },
     { path: 'reservation', component: AdminReservationComponent },
-    { path: 'contact-info', component: AdminContactInfoComponent }
+    { path: 'contact-info', component: AdminContactInfoComponent },
+    { path: '', component: DashboardComponent }
   ]
 }
 ];

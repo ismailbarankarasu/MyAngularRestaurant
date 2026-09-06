@@ -1,0 +1,305 @@
+<div class="dashboard-page">
+
+  <!-- Page Header -->
+  <div class="dashboard-heading">
+
+    <div>
+      <h2>Dashboard</h2>
+
+      <p>
+        Restoran sisteminin güncel durumunu buradan takip edebilirsiniz.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- Stats -->
+  <div class="row g-4 mb-4">
+
+    <!-- Products -->
+    <div class="col-xl-3 col-md-6">
+
+      <div class="stat-card">
+
+        <div class="stat-icon stat-icon-blue">
+          <i class="bi bi-basket2-fill"></i>
+        </div>
+
+        <div>
+          <span class="stat-label">
+            Toplam Ürün
+          </span>
+
+          <h3>
+            {{ productCount }}
+          </h3>
+
+          <small>
+            Menüdeki toplam ürün sayısı
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Categories -->
+    <div class="col-xl-3 col-md-6">
+
+      <div class="stat-card">
+
+        <div class="stat-icon stat-icon-green">
+          <i class="bi bi-tags-fill"></i>
+        </div>
+
+        <div>
+          <span class="stat-label">
+            Toplam Kategori
+          </span>
+
+          <h3>
+            {{ categoryCount }}
+          </h3>
+
+          <small>
+            Aktif menü kategorileri
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Reservations -->
+    <div class="col-xl-3 col-md-6">
+
+      <div class="stat-card">
+
+        <div class="stat-icon stat-icon-orange">
+          <i class="bi bi-calendar-check-fill"></i>
+        </div>
+
+        <div>
+          <span class="stat-label">
+            Rezervasyonlar
+          </span>
+
+          <h3>
+            {{ reservationCount }}
+          </h3>
+
+          <small>
+            Toplam rezervasyon sayısı
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Services -->
+    <div class="col-xl-3 col-md-6">
+
+      <div class="stat-card">
+
+        <div class="stat-icon stat-icon-purple">
+          <i class="bi bi-grid-fill"></i>
+        </div>
+
+        <div>
+          <span class="stat-label">
+            Hizmetler
+          </span>
+
+          <h3>
+            {{ serviceCount }}
+          </h3>
+
+          <small>
+            Ana sayfadaki hizmet sayısı
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Tables -->
+  <div class="row g-4">
+
+    <!-- Recent Reservations -->
+    <div class="col-xl-7">
+
+      <div class="dashboard-card">
+
+        <div class="dashboard-card-header">
+
+          <div>
+            <h5>Son Rezervasyonlar</h5>
+
+            <span>
+              Sisteme eklenen son rezervasyon kayıtları
+            </span>
+          </div>
+
+          <a
+            routerLink="/admin/reservation"
+            class="btn btn-sm btn-outline-primary"
+          >
+            Tümünü Gör
+          </a>
+
+        </div>
+
+
+        <div class="table-responsive">
+
+          <table class="table align-middle mb-0">
+
+            <thead>
+              <tr>
+                <th>Müşteri</th>
+                <th>Tarih</th>
+                <th>Kişi</th>
+                <th>E-posta</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr *ngFor="let reservation of recentReservations">
+
+                <td>
+
+                  <div class="customer-cell">
+
+                    <div class="customer-avatar">
+                      {{ reservation.name.charAt(0) }}
+                    </div>
+
+                    <strong>
+                      {{ reservation.name }}
+                    </strong>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  {{ reservation.reservationDate | date:'dd.MM.yyyy HH:mm' }}
+                </td>
+
+                <td>
+                  <span class="person-badge">
+                    {{ reservation.personCount }} Kişi
+                  </span>
+                </td>
+
+                <td>
+                  {{ reservation.email }}
+                </td>
+
+              </tr>
+
+
+              <tr *ngIf="recentReservations.length === 0">
+
+                <td
+                  colspan="4"
+                  class="text-center text-muted py-4"
+                >
+                  Rezervasyon bulunamadı.
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Recent Products -->
+    <div class="col-xl-5">
+
+      <div class="dashboard-card">
+
+        <div class="dashboard-card-header">
+
+          <div>
+            <h5>Son Eklenen Ürünler</h5>
+
+            <span>
+              Menüye son eklenen ürünler
+            </span>
+          </div>
+
+          <a
+            routerLink="/admin/menu"
+            class="btn btn-sm btn-outline-primary"
+          >
+            Tümünü Gör
+          </a>
+
+        </div>
+
+
+        <div class="product-list">
+
+          <div
+            *ngFor="let product of recentProducts"
+            class="product-item"
+          >
+
+            <img
+              [src]="product.imageUrl"
+              [alt]="product.title"
+            >
+
+            <div class="product-info">
+
+              <strong>
+                {{ product.title }}
+              </strong>
+
+              <span>
+                {{ product.category?.categoryName }}
+              </span>
+
+            </div>
+
+            <div class="product-price">
+              {{ product.price | currency:'TRY':'symbol-narrow' }}
+            </div>
+
+          </div>
+
+
+          <div
+            *ngIf="recentProducts.length === 0"
+            class="text-center text-muted py-4"
+          >
+            Ürün bulunamadı.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

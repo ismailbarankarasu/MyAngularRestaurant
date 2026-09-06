@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -23,6 +23,7 @@ import { AdminServiceComponent } from './admin/admin-service/admin-service.compo
 import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
 import { AdminReservationComponent } from './admin/admin-reservation/admin-reservation.component';
 import { AdminContactInfoComponent } from './admin/admin-contact-info/admin-contact-info.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -43,13 +44,15 @@ import { AdminContactInfoComponent } from './admin/admin-contact-info/admin-cont
     AdminServiceComponent,
     AdminAboutComponent,
     AdminReservationComponent,
-    AdminContactInfoComponent
+    AdminContactInfoComponent,
+    DashboardComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+imports: [
+  BrowserModule,
+  CommonModule,
+  AppRoutingModule,
+  FormsModule
+],
   providers: [
     provideHttpClient(withInterceptorsFromDi())
   ],
