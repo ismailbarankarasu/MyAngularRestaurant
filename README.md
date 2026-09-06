@@ -1,59 +1,144 @@
-# MyAngularRestaurant
+# 🍽️ MyAngularRestaurant
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+Modern ve responsive bir restoran web uygulaması. Proje, Angular tabanlı kullanıcı arayüzü ile ASP.NET Core Web API backend'ini bir araya getirerek restoran içeriklerinin dinamik olarak yönetilebildiği bir yapı sunar.
 
-## Development server
+## ✨ Özellikler
 
-To start a local development server, run:
+- Responsive restoran ana sayfası
+- Dinamik öne çıkan alan (Feature)
+- Hizmetler bölümü
+- Hakkımızda bölümü
+- Kategori bazlı dinamik menü ve ürünler
+- Online rezervasyon formu
+- Dinamik iletişim ve footer bilgileri
+- Yönetim paneli ve dashboard
+- Kategori CRUD işlemleri
+- Menü / ürün CRUD işlemleri
+- Feature, Service ve About yönetimi
+- Rezervasyon yönetimi
+- İletişim bilgileri yönetimi
+- Kullanıcı kayıt ve giriş sistemi
+- LocalStorage tabanlı oturum yönetimi
+- AuthGuard ile yönetim paneli erişim kontrolü
+- Giriş yapan kullanıcı bilgilerini görüntüleme
+- Güvenli çıkış işlemi
+
+## 🛠️ Kullanılan Teknolojiler
+
+- Angular
+- TypeScript
+- HTML5
+- CSS3
+- Bootstrap
+- Bootstrap Icons
+- Font Awesome
+- Angular Router
+- Angular HttpClient
+- Template-driven Forms
+- RxJS
+- SweetAlert2
+- LocalStorage
+
+## 🧩 Uygulama Yapısı
+
+Proje kullanıcı arayüzü ve yönetim paneli olmak üzere iki temel bölümden oluşur.
+
+### Kullanıcı Arayüzü
+
+Ana sayfadaki Feature, Services, About, Menu, Reservation ve Contact alanları ayrı Angular component'leri olarak geliştirilmiştir. Veriler servisler üzerinden REST API'den alınır.
+
+### Yönetim Paneli
+
+Yönetim panelinde dashboard üzerinden sistem özeti görüntülenebilir. Kategoriler, ürünler, öne çıkan alan, hizmetler, hakkımızda, rezervasyonlar ve iletişim bilgileri ayrı yönetim ekranlarından kontrol edilebilir.
+
+`/admin` rotası AuthGuard ile korunmaktadır. Oturum açmamış kullanıcılar giriş ekranına yönlendirilir.
+
+## 🔐 Authentication
+
+Projede case kapsamına uygun, sade bir authentication akışı bulunmaktadır.
+
+- Register ile yeni kullanıcı oluşturma
+- Login ile kullanıcı doğrulama
+- Kullanıcı bilgisini LocalStorage'da saklama
+- AuthGuard ile admin panelini koruma
+- Logout ile oturumu sonlandırma
+
+> Not: Bu authentication yapısı demo/case projesi kapsamında hazırlanmıştır ve token tabanlı production authentication sistemi değildir.
+
+## 🔗 Backend
+
+Frontend, ASP.NET Core Web API projesi ile HTTP üzerinden haberleşmektedir.
+
+Backend repository:
+
+https://github.com/ismailbarankarasu/MyAngularRestaurantServer
+
+## 🚀 Kurulum
+
+Repository'yi klonlayın:
+
+```bash
+git clone https://github.com/ismailbarankarasu/MyAngularRestaurant.git
+cd MyAngularRestaurant
+```
+
+Bağımlılıkları yükleyin:
+
+```bash
+npm install
+```
+
+Uygulamayı çalıştırın:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Tarayıcıdan aşağıdaki adrese gidin:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Uygulamanın verileri yükleyebilmesi için backend API'nin de çalışıyor olması gerekir.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 🏗️ Production Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build çıktıları `dist/` dizininde oluşturulur.
 
-## Running unit tests
+## 📁 Öne Çıkan Angular Yapıları
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```text
+src/app/
+├── _models/
+├── _services/
+├── guards/
+├── auth/
+│   ├── login/
+│   └── register/
+├── admin/
+├── layouts/
+│   ├── main-layout/
+│   └── admin-layout/
+├── feature/
+├── service/
+├── about/
+├── menu/
+├── reservation/
+└── footer/
 ```
 
-## Running end-to-end tests
+## 👨‍💻 Geliştirici
 
-For end-to-end (e2e) testing, run:
+**İsmail Baran Karasu**
 
-```bash
-ng e2e
-```
+- GitHub: https://github.com/ismailbarankarasu
+- LinkedIn: https://www.linkedin.com/in/ismail-baran-karasu/
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📄 Proje Hakkında
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Bu proje Angular, REST API entegrasyonu, component tabanlı frontend mimarisi, CRUD işlemleri, yönetim paneli ve temel authentication akışının birlikte uygulanması amacıyla geliştirilmiştir.
